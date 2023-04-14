@@ -8,7 +8,7 @@ module.exports.getMovie = async (req, res, next) => {
   const userId = req.user._id;
 
   try {
-    const movies = await Movie.find({ owner: userId });
+    const movies = await Movie.find({ owner: userId }).populate('owner');
 
     if (!movies) {
       res.json({ message: 'Вы не сохранили ни одного фильма' });
@@ -28,7 +28,7 @@ module.exports.postMovie = async (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,
@@ -43,7 +43,7 @@ module.exports.postMovie = async (req, res, next) => {
     year,
     description,
     image,
-    trailer,
+    trailerLink,
     nameRU,
     nameEN,
     thumbnail,

@@ -64,7 +64,7 @@ module.exports.createUser = async (req, res, next) => {
   } = req.body;
 
   try {
-    const hash = await bcrypt.hash(10, password);
+    const hash = await bcrypt.hash(password, 10);
     const newUser = await User.create(new User({
       name,
       email,
@@ -91,7 +91,7 @@ module.exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne(email).select('+password');
+    const user = await User.findOne({ email }).select('+password');
     if (!user) {
       throw new AuthorizationError('Неправельные логин или пароль');
     }
