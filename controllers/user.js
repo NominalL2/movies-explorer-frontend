@@ -1,7 +1,13 @@
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 const NotFoundError = require('../errors/NotFoundError');
 const IncorrectError = require('../errors/IncorrectError');
+const ExistsEmailError = require('../errors/ExistsEmailError');
+const AuthorizationError = require('../errors/AuthorizationError');
+
+const { JWT_SECRET } = require('../constants');
 
 function resultUser(user, res) {
   if (user) {
@@ -46,6 +52,63 @@ module.exports.patchMe = async (req, res, next) => {
     if (error.name === 'ValidationError') {
       next(new IncorrectError('ValidationError'));
     }
+    next(error);
+  }
+};
+
+module.exports.createUser = async (req, res, next) => {
+  const {
+    name,
+    email,
+    password,
+  } = req.body;
+
+  try {
+    const hash = await bcrypt.hash(10, password);
+    const newUser = await User.create(new User({
+      name,
+      email,
+      password: hash,
+    }));
+
+    res.status(201).json({
+      name: newUser.name,
+      email: newUser.email,
+      _id: newUser._id,
+    });
+  } catch (error) {
+    if (error.name === 'ValidationError') {
+      next(new IncorrectError('ValidationError'));
+    } else if (error.code === 11000) {
+      next(new ExistsEmailError('Пользователь с этой почтой уже существует'));
+    } else {
+      next(error);
+    }
+  }
+};
+
+module.exports.login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.findOne(email).select('+password');
+    if (!user) {
+      throw new AuthorizationError('Неправельные логин или пароль');
+    }
+
+    const login = bcrypt.compare(password, user.password);
+    if (!login) {
+      throw new AuthorizationError('Неправельные логин или пароль');
+    }
+
+    const token = jwt.sign(
+      { _id: user._id },
+      JWT_SECRET,
+      { expiresIn: '7d' },
+    );
+
+    res.json({ token });
+  } catch (error) {
     next(error);
   }
 };

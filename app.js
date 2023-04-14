@@ -2,15 +2,21 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 
+const { MONGO_DB } = require('./constants');
+
 const { PORT = '3000' } = process.env;
 
 const app = express();
 
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(MONGO_DB, {
   useNewUrlParser: true,
 });
+
+app.use('/user', require('./routes/user'));
+
+app.use('/movie', require('./routes/movie'));
 
 app.use(errors());
 
