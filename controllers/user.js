@@ -11,7 +11,7 @@ const { JWT_SECRET } = require('../constants');
 
 function resultUser(user, res) {
   if (user) {
-    res.json(user);
+    return res.json(user);
   }
   throw new NotFoundError('User not found');
 }
