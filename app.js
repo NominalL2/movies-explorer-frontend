@@ -28,9 +28,9 @@ app.post('/signin', signinValidation, login);
 
 app.post('/signup', signupValidation, createUser);
 
-app.use('/user', auth, require('./routes/user'));
+app.use('/users', auth, require('./routes/user'));
 
-app.use('/movie', auth, require('./routes/movie'));
+app.use('/movies', auth, require('./routes/movie'));
 
 app.use(auth, router.use('*', (req, res, next) => {
   next(new NotFoundError('Not Found'));
