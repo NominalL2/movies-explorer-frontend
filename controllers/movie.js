@@ -29,10 +29,10 @@ module.exports.postMovie = async (req, res, next) => {
     description,
     image,
     trailerLink,
-    nameRU,
-    nameEN,
     thumbnail,
     movieId,
+    nameRU,
+    nameEN,
   } = req.body;
   const owner = req.user._id;
 
@@ -44,11 +44,11 @@ module.exports.postMovie = async (req, res, next) => {
     description,
     image,
     trailerLink,
+    thumbnail,
+    owner,
+    movieId,
     nameRU,
     nameEN,
-    thumbnail,
-    movieId,
-    owner,
   });
 
   try {

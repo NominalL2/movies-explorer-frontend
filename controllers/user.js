@@ -51,6 +51,8 @@ module.exports.patchMe = async (req, res, next) => {
   } catch (error) {
     if (error.name === 'ValidationError') {
       next(new IncorrectError('ValidationError'));
+    } else if (error.code === 11000) {
+      next(new ExistsEmailError('Пользователь с этой почтой уже существует'));
     }
     next(error);
   }
