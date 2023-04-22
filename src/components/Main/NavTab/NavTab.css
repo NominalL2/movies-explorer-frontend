@@ -1,0 +1,47 @@
+.navTab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  min-height: 493px;
+  background-color: #272727;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.navTab__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  text-align: center;
+  margin: 0;
+  max-width: 702px;
+  margin-top: 160px;
+  margin-bottom: 150px;
+}
+
+.navTab__navBar {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 29px
+}
+
+.navTab__navButton {
+  background: #303030;
+  border-radius: 10px;
+  width: 96px;
+  height: 36px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: white;
+  border: none;
+  margin: 0 5px;
+  cursor: pointer;
+}

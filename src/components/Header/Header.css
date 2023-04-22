@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 1280px;
+  padding-top: 18px;
+  margin: auto;
+}
+
+.header__logo {
+  background-image: url(../../images/header/logo.svg);
+  background-size: cover;
+  width: 38px;
+  height: 38px;
+  margin-bottom: 18px;
+  margin-left: 70px;
+}
+
+.header__sign {
+  display: flex;
+  flex-direction: row;
+  margin-right: 70px;
+}
+
+.header__signup {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+  margin-right: 30px;
+  margin-top: 11px;
+  cursor: pointer;
+}
+
+.header__signin {
+  background: #3DDC84;
+  border-radius: 3px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0;
+  width: 76px;
+  height: 35px;
+  cursor: pointer;
+  border: none;
+}
