@@ -1,0 +1,73 @@
+.techs {
+  background-color: #272727;
+  margin: 0 auto;
+  margin-top: 110px;
+}
+
+.techs__container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1140px;
+}
+
+.techs__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-top: 100px;
+  border-bottom: 1px #DADADA solid;
+  padding-bottom: 23px;
+  max-width: 1140px;
+}
+
+.techs__info {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-top: 90px;
+}
+
+.techs__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 0;
+  margin-top: 25px;
+  max-width: 463px;
+  align-self: center;
+}
+
+.techs__technologies {
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(7, 90px);
+  grid-template-rows: 60px;
+  column-gap: 10px;
+  margin: 100px 0;
+}
+
+.techs__technology {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 0;
+  background-color: #303030;
+  border-radius: 10px;
+}
