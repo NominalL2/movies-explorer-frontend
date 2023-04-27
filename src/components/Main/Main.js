@@ -5,7 +5,6 @@ import Promo from './Promo/Promo.js';
 import Techs from './Techs/Techs.js';
 import AboutMe from './AboutMe/AboutMe.js';
 import Portfolio from './Portfolio/Portfolio.js';
-import Footer from '../Footer/Footer.js';
 
 function Main() {
   return (
@@ -15,7 +14,6 @@ function Main() {
       <Techs></Techs>
       <AboutMe></AboutMe>
       <Portfolio></Portfolio>
-      <Footer></Footer>
     </main>
   );
 }
