@@ -6,7 +6,7 @@ import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js';
-import Footer from '../Footer/Footer.js';
+import Profile from '../Profile/Profile.js';
 
 function App() {
   return (
@@ -16,9 +16,9 @@ function App() {
     <Routes>
       <Route path='/' element={<Main/>} />
       <Route path='/movies' element={<Movies/>} />
-      <Route path='saved-movies' element={<SavedMovies/>} />
+      <Route path='/saved-movies' element={<SavedMovies/>} />
+      <Route path='/profile' element={<Profile name='Никита' email='pochta@yandex.ru' />} />
     </Routes>
-    <Footer></Footer>
     </div>
     </>
   );

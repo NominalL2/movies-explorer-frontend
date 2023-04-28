@@ -3,6 +3,7 @@ import './SavedMovies.css';
 import SearchForm from '../Movies/SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 import Preloader from '../Movies/Preloader/Preloader.js';
+import Footer from '../Footer/Footer.js';
 
 function SavedMovies() {
   return (
@@ -12,6 +13,7 @@ function SavedMovies() {
         <MoviesCardList />
         <Preloader />
       </main>
+      <Footer></Footer>
     </>
   );
 }
