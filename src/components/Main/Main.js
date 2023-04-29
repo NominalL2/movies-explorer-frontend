@@ -1,5 +1,6 @@
 import './Main.css';
 
+import Header from '../Header/Header.js';
 import NavTab from './NavTab/NavTab.js';
 import Promo from './Promo/Promo.js';
 import Techs from './Techs/Techs.js';
@@ -9,14 +10,17 @@ import Footer from '../Footer/Footer.js';
 
 function Main() {
   return (
-    <main className='content'>
-      <NavTab></NavTab>
-      <Promo></Promo>
-      <Techs></Techs>
-      <AboutMe></AboutMe>
-      <Portfolio></Portfolio>
-      <Footer></Footer>
-    </main>
+    <>
+      <Header />
+      <main className='content'>
+        <NavTab></NavTab>
+        <Promo></Promo>
+        <Techs></Techs>
+        <AboutMe></AboutMe>
+        <Portfolio></Portfolio>
+        <Footer></Footer>
+      </main>
+    </>
   );
 }
 
