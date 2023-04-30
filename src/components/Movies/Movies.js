@@ -9,13 +9,13 @@ import Footer from '../Footer/Footer.js';
 function Movies() {
   return (
     <>
-      <Header />
+      <Header logged={true} />
       <SearchForm />
       <main className='content'>
         <MoviesCardList />
         <Preloader />
       </main>
-      <Footer></Footer>
+      <Footer />
     </>
   );
 }

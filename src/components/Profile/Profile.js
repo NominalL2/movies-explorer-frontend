@@ -1,9 +1,11 @@
 import './Profile.css';
 
+import Header from '../Header/Header.js';
 
 function Profile(props) {
   return (
     <>
+    <Header logged={true} />
       <main className='profile'>
         <h2 className='profile__title'>{`Привет, ${props.name}!`}</h2>
         <div className='profile__container'>
