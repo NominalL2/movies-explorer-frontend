@@ -2,9 +2,21 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  max-width: 1280px;
+  max-width: 1140px;
   padding-top: 18px;
   margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    max-width: 708px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    max-width: 292px;
+  }
 }
 
 .header_logged {
@@ -13,18 +25,23 @@
 
 .header__logo {
   background-image: url(../../images/header/logo.svg);
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
   width: 38px;
   height: 38px;
   margin-bottom: 18px;
-  margin-left: 70px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .header__logo {
+    width: 44px;
+  }
 }
 
 .header__sign {
   display: flex;
   flex-direction: row;
-  margin-right: 70px;
 }
 
 .header__signup {
@@ -42,6 +59,15 @@
   color: white;
 }
 
+@media screen and (max-width: 320px) {
+  .header__signup {
+    font-size: 10px;
+    line-height: 16px;
+    margin-right: 14px;
+    margin-top: 12px;
+  }
+}
+
 .header__signin {
   background: #3DDC84;
   border-radius: 3px;
@@ -56,50 +82,12 @@
   border: none;
 }
 
-.header__navigation {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1058px;
-  width: 100%;
-  margin-left: 45px;
-}
-
-.header__movies {
-  display: flex;
-  justify-content: space-between;
-  max-width: 212px;
-  width: 100%;
-  margin-top: 11px;
-}
-
-.header__account {
-  display: flex;
-  margin-top: 7px;
-  margin-right: 4px;
-}
-
-.header__link {
-  border: none;
-  background: none;
-  padding: 0;
-  color: white;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 18px;
-  cursor: pointer;
-}
-
-.header__icon {
-  display: inline-block;
-  width: 26px;
-  height: 26px;
-  background-position: center;
-  background-color: #313131;
-  background-repeat: no-repeat;
-  border-radius: 50px;
-  background-image: url(../../images/header/men_icon.svg);
-  margin-left: 8px;
-  cursor: pointer;
+@media screen and (max-width: 320px) {
+  .header__signin {
+    font-size: 10px;
+    line-height: 16px;
+    width: 54px;
+    height: 26px;
+    margin-top: 6px;
+  }
 }

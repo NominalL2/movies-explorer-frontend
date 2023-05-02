@@ -11,6 +11,18 @@
   max-width: 1140px;
 }
 
+@media screen and (max-width: 768px) {
+  .techs__container {
+    max-width: 668px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs__container {
+    max-width: 284px;
+  }
+}
+
 .techs__title {
   font-style: normal;
   font-weight: 400;
@@ -24,6 +36,21 @@
   max-width: 1140px;
 }
 
+@media screen and (max-width: 768px) {
+  .techs__title {
+    margin-top: 71px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 32px;
+    padding-bottom: 27px;
+  }
+}
+
 .techs__info {
   font-style: normal;
   font-weight: 400;
@@ -33,6 +60,20 @@
   letter-spacing: -0.04em;
   margin: 0;
   margin-top: 90px;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__info {
+    margin-top: 79px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs__info {
+    font-size: 30px;
+    line-height: 36px;
+    margin-top: 60px;
+  }
 }
 
 .techs__text {
@@ -48,6 +89,22 @@
   align-self: center;
 }
 
+@media screen and (max-width: 768px) {
+  .techs__text {
+    font-size: 12px;
+    line-height: 18px;
+    margin-top: 23px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+    margin-top: 24px;
+  }
+}
+
 .techs__technologies {
   align-self: center;
   display: grid;
@@ -55,6 +112,44 @@
   grid-template-rows: 60px;
   column-gap: 10px;
   margin: 100px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__technologies {
+    grid-template-columns: repeat(7, 84px);
+    grid-template-rows: 57px;
+    margin: 83px 0;
+  }
+}
+
+@media screen and (max-width: 655px) {
+  .techs__technologies {
+    grid-template-columns: repeat(5, 84px);
+    grid-template-rows: repeat(2, 57px);
+    row-gap: 10px;
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .techs__technologies {
+    grid-template-columns: repeat(4, 84px);
+    grid-template-rows: repeat(3, 57px);
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .techs__technologies {
+    grid-template-columns: repeat(3, 84px);
+    grid-template-rows: repeat(4, 57px);
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .techs__technologies {
+    grid-template-columns: repeat(2, 84px);
+    grid-template-rows: repeat(5, 57px);
+    margin: 51px;
+  }
 }
 
 .techs__technology {
@@ -70,4 +165,11 @@
   margin: 0;
   background-color: #303030;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .techs__technology {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

@@ -7,6 +7,14 @@
   width: 100%;
 }
 
+@media screen and (max-width: 768px) {
+  .register {
+    padding-top: 232px;
+    padding-bottom: 233px;
+    max-width: 391px;
+  }
+}
+
 .register__logo {
   background-image: url(../../images/header/logo.svg);
   background-size: cover;

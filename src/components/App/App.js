@@ -29,7 +29,7 @@ function App() {
           <Route path='/' element={<Main />} />
           <Route path='/movies' element={<Movies />} />
           <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile name='Никита' email='pochta@yandex.ru' />} />
+          <Route path='/profile' element={<Profile name='Виталий' email='pochta@yandex.ru' />} />
           <Route path='/signup' element={<Register />} />
           <Route path='/signin' element={<Login />} />
           <Route path='*' element={<NotFoundError handleGoBack={handleGoBack} />} />

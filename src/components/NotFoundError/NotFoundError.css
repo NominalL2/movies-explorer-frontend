@@ -4,6 +4,12 @@
   align-items: center;
 }
 
+@media screen and (max-width: 768px) {
+  .notFoundError {
+    padding-bottom: 222px;
+  }
+}
+
 .notFoundError__title {
   font-style: normal;
   font-weight: 400;
@@ -12,6 +18,12 @@
   text-align: center;
   margin: 0;
   margin-top: 245px;
+}
+
+@media screen and (max-width: 768px) {
+  .notFoundError__title {
+    margin-top: 407px;
+  }
 }
 
 .notFoundError__text {

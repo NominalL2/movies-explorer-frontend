@@ -10,8 +10,8 @@ function Techs() {
           <p className='techs__text'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
           <div className='techs__technologies'>
             <div className='techs__technology'>HTML</div>
-            <div className='techs__technology'>Css</div>
-            <div className='techs__technology'>Js</div>
+            <div className='techs__technology'>CSS</div>
+            <div className='techs__technology'>JS</div>
             <div className='techs__technology'>React</div>
             <div className='techs__technology'>Git</div>
             <div className='techs__technology'>Express.js</div>

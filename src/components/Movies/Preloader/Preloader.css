@@ -7,6 +7,12 @@
   max-width: 1140px;
 }
 
+@media screen and (max-width: 768px) {
+  .preloader {
+    margin-top: 81px;
+  }
+}
+
 .preloader__button {
   font-style: normal;
   font-weight: 500;

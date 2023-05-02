@@ -4,12 +4,29 @@
   justify-content: center;
   align-items: center;
   max-width: 1200px;
-  min-height: 493px;
+  height: 493px;
   background-color: #272727;
   border-radius: 10px;
   margin: 0 auto;
   margin-top: 20px;
 }
+
+@media screen and (max-width: 768px) {
+  .navTab {
+    max-width: 728px;
+    height: 834px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navTab {
+    max-width: 292px;
+    height: 586px;
+    margin-top: 14px;
+    justify-content: normal;
+  }
+}
+
 
 .navTab__title {
   font-style: normal;
@@ -25,10 +42,36 @@
   margin-bottom: 150px;
 }
 
+@media screen and (max-width: 768px) {
+  .navTab__title {
+    font-size: 40px;
+    line-height: 52px;
+    max-width: 682px;
+    margin-top: 351px;
+    margin-bottom: 314px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navTab__title {
+    font-size: 29px;
+    line-height: 37px;
+    margin-top: 220px;
+    margin-bottom: 211px;
+  }
+}
+
 .navTab__navBar {
   display: flex;
   flex-direction: row;
-  margin-bottom: 29px
+  margin-bottom: 29px;
+  gap: 10px;
+}
+
+@media screen and (max-width: 320px) {
+  .navTab__navBar {
+    gap: 6px;
+  }
 }
 
 .navTab__navButton {
@@ -42,6 +85,15 @@
   line-height: 16px;
   color: white;
   border: none;
-  margin: 0 5px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .navTab__navButton {
+    width: 82px;
+    height: 26px;
+    font-size: 10px;
+    line-height: 16px;
+    border-radius: 6px;
+  }
 }

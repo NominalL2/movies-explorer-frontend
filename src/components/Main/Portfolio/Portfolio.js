@@ -13,7 +13,7 @@ function Portfolio() {
           <p className='portfolio__text'>Адаптивный сайт</p>
           <div className='portfolio__icon'></div>
         </a>
-        <a className='portfolio__link portfolio__link_last' href='#'>
+        <a className='portfolio__link' href='#'>
           <p className='portfolio__text'>Одностраничное приложение</p>
           <div className='portfolio__icon'></div>
         </a>

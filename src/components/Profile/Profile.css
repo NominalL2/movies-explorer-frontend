@@ -6,6 +6,12 @@
   margin-top: 74px;
 }
 
+@media screen and (max-width: 768px) {
+  .profile {
+    margin-top: 235.8px;
+  }
+}
+
 .profile__title {
   font-style: normal;
   font-weight: 500;
@@ -14,6 +20,12 @@
   text-align: center;
   margin: 0;
   margin-bottom: 123px;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__title {
+    margin-bottom: 96px;
+  }
 }
 
 .profile__container {
@@ -64,6 +76,12 @@
   cursor: pointer;
 }
 
+@media screen and (max-width: 768px) {
+  .profile__edit {
+    margin-top: 210px;
+  }
+}
+
 .profile__exit {
   margin: 0;
   margin-bottom: 70px;
@@ -77,4 +95,10 @@
   text-align: center;
   color: #EE3465;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__exit {
+    margin-bottom: 270px;
+  }
 }
