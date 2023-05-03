@@ -1,15 +1,16 @@
 import './MoviesCard.css';
 
+
 function MoviesCard(props) {
   return (
     <>
-      <div className='moviesCard'>
-        <div className='moviesCard__info'>
-          <p className='moviesCard__name'>{props.name}</p>
-          <p className='moviesCard__time'>{props.time}</p>
-          <div className='moviesCard__like moviesCard__like_active' />
+      <div className='movies-card'>
+        <div className='movies-card__info'>
+          <p className='movies-card__name'>{props.name}</p>
+          <p className='movies-card__time'>{props.time}</p>
         </div>
-        <img className='moviesCard__image' src={props.img} alt='постер фильма' />
+        <div className='movies-card__like movies-card__like_active' />
+        <img className='movies-card__image' src={props.img} alt='постер фильма' />
       </div>
     </>
   );

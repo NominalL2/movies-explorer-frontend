@@ -12,7 +12,7 @@ function Main() {
   return (
     <>
       <Header logged={false} />
-      <main className='content'>
+      <main className='main'>
         <NavTab />
         <Promo />
         <Techs />

@@ -13,6 +13,12 @@
   }
 }
 
+@media screen and (max-width: 320px) {
+  .preloader {
+    margin-top: 72px;
+  }
+}
+
 .preloader__button {
   font-style: normal;
   font-weight: 500;
@@ -28,4 +34,10 @@
   border: 1px #424242 solid;
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .preloader__button {
+    max-width: 240px;
+  }
 }

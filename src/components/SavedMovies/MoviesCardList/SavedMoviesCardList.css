@@ -1,4 +1,4 @@
-.moviesCardList {
+.saved-movies-card-list {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 320px) {
-  .moviesCardList {
+  .saved-movies-card-list {
     row-gap: 21px;
   }
 }

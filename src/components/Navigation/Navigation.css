@@ -78,3 +78,13 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .navigation__nav-icon {
+    width: 35px;
+    height: 36px;
+    background-size: cover;
+    margin-top: 1px;
+    margin-right: 3px;
+  }
+}

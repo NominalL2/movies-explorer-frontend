@@ -18,6 +18,12 @@
   }
 }
 
+@media screen and (max-width: 400px) {
+  .navTab {
+    height: 890px;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .navTab {
     max-width: 292px;
@@ -52,7 +58,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 320px) {
   .navTab__title {
     font-size: 29px;
     line-height: 37px;

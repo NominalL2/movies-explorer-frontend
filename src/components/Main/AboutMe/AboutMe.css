@@ -45,6 +45,13 @@
   margin-top: 67px;
 }
 
+@media screen and (max-width: 630px) {
+  .aboutMe__me {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+
 @media screen and (max-width: 320px) {
   .aboutMe__me {
     flex-direction: column-reverse;
@@ -140,6 +147,20 @@
   .aboutMe__image {
     width: 255px;
     height: 307px;
+  }
+}
+
+@media screen and (max-width: 630px) {
+  .aboutMe__image {
+    width: 360px;
+    height: 460px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .aboutMe__image {
+    width: 320px;
+    height: 422px;
   }
 }
 

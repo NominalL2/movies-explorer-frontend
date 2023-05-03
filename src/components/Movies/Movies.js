@@ -13,7 +13,7 @@ function Movies() {
       <Header logged={true} />
       <PopupMenu />
       <SearchForm />
-      <main className='content'>
+      <main className='movies'>
         <MoviesCardList />
         <Preloader />
       </main>

@@ -2,7 +2,7 @@ import './SavedMovies.css';
 
 import Header from '../Header/Header.js';
 import SearchForm from '../Movies/SearchForm/SearchForm.js';
-import MoviesCardList from './MoviesCardList/MoviesCardList.js';
+import SavedMoviesCardList from './MoviesCardList/SavedMoviesCardList.js';
 import Preloader from '../Movies/Preloader/Preloader.js';
 import Footer from '../Footer/Footer.js';
 
@@ -11,8 +11,8 @@ function SavedMovies() {
     <>
       <Header logged={true} />
       <SearchForm />
-      <main className='content'>
-        <MoviesCardList />
+      <main className='saved-movies'>
+        <SavedMoviesCardList />
         <Preloader />
       </main>
       <Footer />

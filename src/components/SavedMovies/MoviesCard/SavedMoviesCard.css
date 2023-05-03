@@ -1,4 +1,4 @@
-.movies-card {
+.saved-movies-card {
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -6,25 +6,25 @@
 }
 
 @media screen and (max-width: 460px) {
-  .movies-card {
+  .saved-movies-card {
     flex-direction: column-reverse;
   }
 }
 
-.movies-card__info {
+.saved-movies-card__info {
   margin-top: 22px;
   margin-left: 22px;
   max-width: 868px;
 }
 
 @media screen and (max-width: 460px) {
-  .movies-card__info {
+  .saved-movies-card__info {
     margin-top: 15px;
     margin-left: 12px;
   }
 }
 
-.movies-card__name {
+.saved-movies-card__name {
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -37,20 +37,20 @@
 }
 
 @media screen and (max-width: 1000px) {
-  .movies-card__name {
+  .saved-movies-card__name {
     max-width: 30vw;
   }
 }
 
 @media screen and (max-width: 460px) {
-  .movies-card__name {
+  .saved-movies-card__name {
     font-size: 12px;
     line-height: 15px;
     max-width: 56vw;
   }
 }
 
-.movies-card__time {
+.saved-movies-card__time {
   font-style: normal;
   font-weight: 400;
   font-size: 11px;
@@ -61,17 +61,18 @@
 }
 
 @media screen and (max-width: 460px) {
-  .movies-card__time {
+  .saved-movies-card__time {
     margin-top: 7px;
     margin-bottom: 13px;
   }
 }
 
-.movies-card__like {
+
+.saved-movies-card__del {
+  background-image: url(../../../images/moviesCard/del.svg);
   position: absolute;
   bottom: 22px;
   left: 22px;
-  background-image: url(../../../images/moviesCard/like.svg);
   background-size: cover;
   width: 14px;
   height: 12px;
@@ -80,17 +81,13 @@
 }
 
 @media screen and (max-width: 460px) {
-  .movies-card__like {
+  .saved-movies-card__del {
     bottom: 36px;
     left: 270px;
   }
 }
 
-.movies-card__like_active {
-  background-image: url(../../../images/moviesCard/like_active.svg);
-}
-
-.movies-card__image {
+.saved-movies-card__image {
   width: 220px;
   height: 122px;
   object-fit: cover;
@@ -100,7 +97,7 @@
 }
 
 @media screen and (max-width: 460px) {
-  .movies-card__image {
+  .saved-movies-card__image {
     width: 300px;
     height: 168px;
     object-fit: cover;
