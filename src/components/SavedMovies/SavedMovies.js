@@ -10,8 +10,8 @@ function SavedMovies() {
   return (
     <>
       <Header logged={true} />
-      <SearchForm />
       <main className='saved-movies'>
+        <SearchForm />
         <SavedMoviesCardList />
         <Preloader />
       </main>

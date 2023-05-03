@@ -7,7 +7,7 @@ function SavedMoviesCard(props) {
         <div className='saved-movies-card__info'>
           <p className='saved-movies-card__name'>{props.name}</p>
           <p className='saved-movies-card__time'>{props.time}</p>
-          <div className='saved-movies-card__del' />
+          <button className='saved-movies-card__del' />
         </div>
         <img className='saved-movies-card__image' src={props.img} alt='постер фильма' />
       </div>

@@ -108,7 +108,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 340px) {
   .navTab__navButton {
     width: 82px;
     height: 20px;

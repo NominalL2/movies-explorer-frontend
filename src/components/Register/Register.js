@@ -54,7 +54,7 @@ function Register() {
 
   return (
     <>
-      <section className='register'>
+      <main className='register'>
         <div className='register__logo' />
         <h2 className='register__title'>Добро пожаловать!</h2>
         <form onSubmit={handleSubmit} className='register__form'>
@@ -97,7 +97,7 @@ function Register() {
         <span className="register__already-registered">Уже зарегистрированы?</span>
         <button onClick={handleClickloginButton} class="register__login-button">Войти</button>
         </div>
-      </section>
+      </main>
     </>
   );
 }

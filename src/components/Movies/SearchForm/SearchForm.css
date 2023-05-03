@@ -50,6 +50,10 @@
   width: 100%;
 }
 
+.searchForm__input:focus::placeholder {
+  color: #4285F4;
+}
+
 @media screen and (max-width: 768px) {
   .searchForm__input {
     margin-left: 16px;
@@ -74,6 +78,11 @@
   border-radius: 48px;
   margin-right: 7px;
   cursor: pointer;
+}
+
+.searchForm__button:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 768px) {

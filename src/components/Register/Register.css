@@ -5,18 +5,26 @@
   padding-top: 70px;
   max-width: 396px;
   width: 100%;
+  padding: 0 10px;
 }
 
 @media screen and (max-width: 768px) {
   .register {
     padding-top: 70px;
     padding-bottom: 233px;
-    max-width: 391px;
+    max-width: 396px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 500px) {
   .register {
+    max-width: 310px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .register {
+    max-width: 250px;
     padding-top: 40px;
     align-items: center;
   }
@@ -37,7 +45,7 @@
   margin: 40px 0;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .register__title {
     margin: 0;
     margin-top: 50px;
@@ -45,7 +53,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .register__form {
     width: 260px;
   }
@@ -110,15 +118,15 @@
   background-color: #4285F4;
   color: white;
   border-radius: 3px;
-  margin-top: 129px;
+  margin-top: 198px;
   cursor: pointer;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .register__submit {
     font-size: 12px;
     line-height: 15px;
-    margin-top: 217px;
+    margin-top: 286px;
   }
 }
 
@@ -133,14 +141,14 @@
   text-align: center;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .register__link-container {
     font-size: 12px;
     line-height: 15px;
   }
 }
 
-.register__already-registered {
+.login__already-registered {
   color: #8B8B8B;
   margin-right: 6px;
 }

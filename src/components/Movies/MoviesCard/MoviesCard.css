@@ -68,6 +68,9 @@
 }
 
 .movies-card__like {
+  border: none;
+  background: none;
+  padding: 0;
   position: absolute;
   bottom: 22px;
   left: 22px;

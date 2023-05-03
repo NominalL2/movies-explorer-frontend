@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <>
-      <section className='login'>
+      <main className='login'>
         <div className='login__logo' />
         <h2 className='login__title'>Рады видеть!</h2>
         <form onSubmit={handleSubmit} className='login__form'>
@@ -74,7 +74,7 @@ function Login() {
         <span className="login__already-logined">Ещё не зарегистрированы?</span>
         <button onClick={handleClickRegisterButton} class="login__register-button">Регистрация</button>
         </div>
-      </section>
+      </main>
     </>
   );
 }
