@@ -51,6 +51,11 @@
   cursor: pointer;
 }
 
+.navigation__button:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
+}
+
 .navigation__profile-icon {
   display: inline-block;
   width: 26px;

@@ -65,6 +65,11 @@
   color: white;
 }
 
+.header__signup:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 320px) {
   .header__signup {
     font-size: 10px;
@@ -86,6 +91,11 @@
   height: 35px;
   cursor: pointer;
   border: none;
+}
+
+.header__signin:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 320px) {

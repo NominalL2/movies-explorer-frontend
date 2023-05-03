@@ -63,6 +63,11 @@
   cursor: pointer;
 }
 
+.popup-menu__button:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
+}
+
 .popup-menu__button_account {
   font-size: 13px;
   line-height: 12px;

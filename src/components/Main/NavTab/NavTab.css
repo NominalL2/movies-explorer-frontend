@@ -96,6 +96,11 @@
   text-decoration: none;
 }
 
+.navTab__navButton:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
+}
+
 @media screen and (max-width: 768px) {
   .navTab__navButton {
     height: 26px;
