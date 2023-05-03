@@ -3,7 +3,7 @@ import './Promo.css';
 function Promo() {
   return (
     <>
-      <section className='promo'>
+      <section className='promo' id='Promo'>
         <h2 className='promo__title'>О проекте</h2>
         <div className='promo__info'>
           <div className='promo__section'>

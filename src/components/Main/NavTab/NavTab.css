@@ -84,22 +84,32 @@
   background: #303030;
   border-radius: 10px;
   width: 96px;
-  height: 36px;
+  height: 24px;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
   color: white;
-  border: none;
   cursor: pointer;
+  text-align: center;
+  padding-top: 10px;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .navTab__navButton {
+    height: 26px;
+    padding-top: 8px;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .navTab__navButton {
     width: 82px;
-    height: 26px;
+    height: 20px;
     font-size: 10px;
     line-height: 16px;
     border-radius: 6px;
+    padding-top: 7px;
   }
 }
