@@ -33,6 +33,12 @@
   }
 }
 
+@media screen and (max-width: 294px) {
+  .navTab {
+    height: 620px;
+  }
+}
+
 
 .navTab__title {
   font-style: normal;

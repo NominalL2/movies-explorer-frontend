@@ -2,10 +2,10 @@
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  padding: 0 10px;
   padding-top: 70px;
   max-width: 396px;
   width: 100%;
-  padding: 0 10px;
 }
 
 @media screen and (max-width: 768px) {
@@ -118,7 +118,7 @@
   background-color: #4285F4;
   color: white;
   border-radius: 3px;
-  margin-top: 198px;
+  margin-top: 129px;
   cursor: pointer;
 }
 
@@ -126,7 +126,7 @@
   .register__submit {
     font-size: 12px;
     line-height: 15px;
-    margin-top: 286px;
+    margin-top: 217px;
   }
 }
 
@@ -148,7 +148,7 @@
   }
 }
 
-.login__already-registered {
+.register__already-registered {
   color: #8B8B8B;
   margin-right: 6px;
 }
