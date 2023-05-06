@@ -2,18 +2,23 @@ import './MoviesCardList.css';
 
 import MoviesCard from '../MoviesCard/MoviesCard.js';
 
-import image from "../../../images/moviesCard/img/movie.png"
+function MoviesCardList(props) {
 
-function MoviesCardList() {
+  function formatTime(minutes) {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours > 0 ? hours + 'ч' : ''} ${mins > 0 ? mins + 'м' : ''}`;
+  }
+
+  function hadleCardClick(link) {
+    window.open(link, '_blank');
+  }
+
   return (
     <section className='moviesCardList'>
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
-      <MoviesCard name='33 слова о дизайне' time='1ч 42м' img={image} />
+      {props.cardsToShow.map((card) => {
+        return <MoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} name={card.nameRU} time={formatTime(card.duration)} img={`https://api.nomoreparties.co/${card.image.url}`} key={card.id} />
+      })}
     </section>
   );
 }

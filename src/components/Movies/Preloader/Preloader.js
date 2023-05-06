@@ -1,10 +1,10 @@
 import './Preloader.css';
 
 
-function Preloader() {
+function Preloader(props) {
   return (
     <section className='preloader'>
-      <button className='preloader__button'>Еще</button>
+      <button onClick={props.preloaderHandleClick} className='preloader__button'>Еще</button>
     </section>
   );
 }
