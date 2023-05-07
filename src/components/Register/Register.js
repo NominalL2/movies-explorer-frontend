@@ -1,56 +1,102 @@
-import './Register.css'
+import './Register.css';
 
-import { useState} from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function Register() {
+import { mainApi } from '../../utils/MainApi.js';
+
+function Register(props) {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorNameMessage, setErrorNameMessage] = useState('');
   const [errorEmailMessage, setErrorEmailMessage] = useState('');
   const [errorPasswordMessage, setErrorPasswordMessage] = useState('');
-  const navigate = useNavigate();
+  const [errorFormMessage, setErrorFormMessage] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleNameChange = (event) => {
     setName(event.target.value);
-    setErrorNameMessage('')
   };
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
-    setErrorEmailMessage('')
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    setErrorPasswordMessage('')
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if(name === '') {
-      setErrorNameMessage('Вы пропустили это поле')
-    } else {
-      setErrorNameMessage('')
-    }
-
-    if(email === '') {
-      setErrorEmailMessage('Вы пропустили это поле')
-    } else {
-      setErrorEmailMessage('')
-    }
-
-    if(password === '') {
-      setErrorPasswordMessage('Вы пропустили это поле')
-    } else {
-      setErrorPasswordMessage('')
-    }
+    mainApi.register(name, email, password)
+    .then((res) => {
+      mainApi.login(email, password)
+      .then((res) => {
+        console.log(res.token);
+        props.handleTokenChange(res.token);
+        navigate('/movies');
+      })
+    })
+    .catch((err) => {
+      setErrorFormMessage(err);
+    })
   };
 
   const handleClickloginButton = () => {
     navigate('/signin')
   };
+
+  useEffect(() => {
+    const nameRegex = /^[a-zA-Zа-яА-Я\s-]*$/;
+    if (name === '') {
+      setErrorNameMessage('Вы не заполнили это поле');
+      setIsFormValid(false);
+    } else if (!nameRegex.test(name)) {
+      setErrorNameMessage('Введите корректное имя');
+      setIsFormValid(false);
+    } else {
+      setErrorNameMessage('');
+    }
+  }, [name]);
+
+  useEffect(() => {
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (email === '') {
+      setErrorEmailMessage('Вы не заполнили это поле');
+      setIsFormValid(false);
+    } else if (!emailRegex.test(email)) {
+      setErrorEmailMessage('Введите корректный email');
+      setIsFormValid(false);
+    } else {
+      setErrorEmailMessage('');
+    }
+  }, [email]);
+
+  useEffect(() => {
+    if (password === '') {
+      setErrorPasswordMessage('Вы не заполнили это поле');
+      setIsFormValid(false);
+    } else {
+      setErrorPasswordMessage('');
+    }
+  }, [password]);
+
+  useEffect(() => {
+    const nameRegex = /^[a-zA-Zа-яА-Я\s-]*$/;
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    if (name !== '' && email !== '' && password !== '' && nameRegex.test(name) && emailRegex.test(email)) {
+      setIsFormValid(true);
+    }
+  }, [name, email, password])
+
+  useEffect(() => {
+    setErrorNameMessage('');
+    setErrorEmailMessage('');
+    setErrorPasswordMessage('');
+  }, []);
 
   return (
     <>
@@ -65,7 +111,7 @@ function Register() {
               id="name"
               value={name}
               onChange={handleNameChange}
-              className={`register__input ${errorNameMessage ? 'register__input_error': ''}`}
+              className={`register__input ${errorNameMessage ? 'register__input_error' : ''}`}
             />
             {errorNameMessage && <div className='register__error'>{errorNameMessage}</div>}
           </div>
@@ -76,7 +122,7 @@ function Register() {
               id="email"
               value={email}
               onChange={handleEmailChange}
-              className={`register__input ${errorEmailMessage ? 'register__input_error': ''}`}
+              className={`register__input ${errorEmailMessage ? 'register__input_error' : ''}`}
             />
             {errorEmailMessage && <div className='register__error'>{errorEmailMessage}</div>}
           </div>
@@ -87,15 +133,16 @@ function Register() {
               id="password"
               value={password}
               onChange={handlePasswordChange}
-              className={`register__input ${errorPasswordMessage ? 'register__input_error': ''}`}
+              className={`register__input ${errorPasswordMessage ? 'register__input_error' : ''}`}
             />
             {errorPasswordMessage && <div className='register__error'>{errorPasswordMessage}</div>}
           </div>
-          <button type="submit" className='register__submit'>Зарегистрироваться</button>
+          {errorFormMessage && <div className='register__error-submit'>{errorFormMessage}</div>}
+          <button type="submit" disabled={!isFormValid} className={`register__submit ${!isFormValid && 'register__submit_disabled'} ${errorFormMessage && 'register__submit_error'}`}>Зарегистрироваться</button>
         </form>
         <div className='register__link-container'>
-        <span className="register__already-registered">Уже зарегистрированы?</span>
-        <button onClick={handleClickloginButton} class="register__login-button">Войти</button>
+          <span className="register__already-registered">Уже зарегистрированы?</span>
+          <button onClick={handleClickloginButton} className="register__login-button">Войти</button>
         </div>
       </main>
     </>

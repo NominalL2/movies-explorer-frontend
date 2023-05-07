@@ -1,5 +1,7 @@
 import './App.css';
 
+import { useState } from 'react';
+
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import Main from '../Main/Main.js';
@@ -12,6 +14,11 @@ import NotFoundError from '../NotFoundError/NotFoundError.js';
 
 function App() {
   const navigate = useNavigate();
+  const [token, setToken] = useState('');
+
+  function handleTokenChange(newToken) {
+    setToken(newToken);
+  }
 
   const handleGoBack = () => {
     if (window.history.length > 1) {
@@ -29,8 +36,8 @@ function App() {
           <Route path='/movies' element={<Movies />} />
           <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='/profile' element={<Profile name='Виталий' email='pochta@yandex.ru' />} />
-          <Route path='/signup' element={<Register />} />
-          <Route path='/signin' element={<Login />} />
+          <Route path='/signup' element={<Register handleTokenChange={handleTokenChange} />} />
+          <Route path='/signin' element={<Login handleTokenChange={handleTokenChange} />} />
           <Route path='*' element={<NotFoundError handleGoBack={handleGoBack} />} />
         </Routes>
       </div>
