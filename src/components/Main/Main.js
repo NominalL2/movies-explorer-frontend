@@ -1,6 +1,5 @@
 import './Main.css';
 
-import Header from '../Header/Header.js';
 import NavTab from './NavTab/NavTab.js';
 import Promo from './Promo/Promo.js';
 import Techs from './Techs/Techs.js';
@@ -11,7 +10,6 @@ import Footer from '../Footer/Footer.js';
 function Main() {
   return (
     <>
-      <Header logged={false} />
       <main className='main'>
         <NavTab />
         <Promo />

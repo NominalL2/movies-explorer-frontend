@@ -34,7 +34,6 @@ function Register(props) {
     .then((res) => {
       mainApi.login(email, password)
       .then((res) => {
-        console.log(res.token);
         props.handleTokenChange(res.token);
         navigate('/movies');
       })

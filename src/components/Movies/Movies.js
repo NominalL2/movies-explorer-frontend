@@ -2,17 +2,18 @@ import './Movies.css';
 
 import { useState, useEffect } from 'react';
 
-import Header from '../Header/Header.js';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 import Preloader from './Preloader/Preloader.js';
 import Footer from '../Footer/Footer.js';
+import Loading from '../Loading/Loading.js';
 
 import { movieApi } from '../../utils/MoviesApi.js';
 
 function Movies() {
   const [cards, setCards] = useState([])
   const [cardsToShow, setCardsToShow] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const preloaderHandleClick = () => {
     const currentLength = cardsToShow.length;
@@ -30,12 +31,15 @@ function Movies() {
       })
       .catch((err) => {
         console.log(err);
-      });
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
   }, []);
 
   return (
+    isLoading ? <Loading /> :
     <>
-      <Header logged={true} />
       <main className='movies'>
         <SearchForm />
         <MoviesCardList cardsToShow={cardsToShow} />

@@ -1,9 +1,14 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
+import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute.js';
+
+import { mainApi } from '../../utils/MainApi.js';
+
+import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js';
@@ -14,11 +19,26 @@ import NotFoundError from '../NotFoundError/NotFoundError.js';
 
 function App() {
   const navigate = useNavigate();
-  const [token, setToken] = useState('');
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   function handleTokenChange(newToken) {
-    setToken(newToken);
+    localStorage.setItem('jwt', newToken);
+    setLoggedIn(true);
   }
+
+  const checkToken = useCallback(async () => {
+    const jwt = localStorage.getItem('jwt');
+    try {
+      await mainApi.checkToken(jwt);
+      setLoggedIn(true);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false)
+    }
+  }, []);
 
   const handleGoBack = () => {
     if (window.history.length > 1) {
@@ -28,14 +48,24 @@ function App() {
     }
   };
 
+  const handleExit = () => {
+    localStorage.removeItem('jwt');
+    navigate('/', setLoggedIn(false));
+  }
+
+  useEffect(() => {
+    checkToken()
+  }, [checkToken])
+
   return (
     <>
       <div className='page'>
+        <Header logged={loggedIn} />
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile name='Виталий' email='pochta@yandex.ru' />} />
+          <Route path='/movies' element={<ProtectedRouteElement element={Movies} isLoading={isLoading} loggedIn={loggedIn} />} />
+          <Route path='/saved-movies' element={<ProtectedRouteElement element={SavedMovies} isLoading={isLoading} loggedIn={loggedIn} />} />
+          <Route path='/profile' element={<ProtectedRouteElement element={Profile} isLoading={isLoading} loggedIn={loggedIn} name='Виталий' email='pochta@yandex.ru' handleExit={handleExit} />} />
           <Route path='/signup' element={<Register handleTokenChange={handleTokenChange} />} />
           <Route path='/signin' element={<Login handleTokenChange={handleTokenChange} />} />
           <Route path='*' element={<NotFoundError handleGoBack={handleGoBack} />} />
