@@ -17,7 +17,7 @@ function MoviesCardList(props) {
   return (
     <section className='moviesCardList'>
       {props.cardsToShow.map((card) => {
-        return <MoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} name={card.nameRU} time={formatTime(card.duration)} img={`https://api.nomoreparties.co/${card.image.url}`} key={card.id} />
+        return <MoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} card={card} time={formatTime(card.duration)} img={`https://api.nomoreparties.co/${card.image.url}`} key={card.id} />
       })}
     </section>
   );

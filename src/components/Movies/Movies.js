@@ -9,6 +9,7 @@ import Footer from '../Footer/Footer.js';
 import Loading from '../Loading/Loading.js';
 
 import { movieApi } from '../../utils/MoviesApi.js';
+import { mainApi } from '../../utils/MainApi.js';
 
 function Movies() {
   const [cards, setCards] = useState([])
@@ -24,10 +25,24 @@ function Movies() {
   };
 
   useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
     movieApi.getCards()
-      .then((res) => {
-        setCardsToShow(res.slice(0, 7));
-        setCards(res)
+      .then((resCards) => {
+        mainApi.getSavedMovies(jwt)
+          .then((resSavedCards) => {
+            const mergedArrayCards = resCards.map(card => {
+              // Объеденяет массив картачек фильмов с массивом сохраненных карточек для того что бы потом определять лайкнута карточка или нет
+              const savedCards = resSavedCards.find(savedCard => savedCard.movieId === card.id);
+              return savedCards ? Object.assign({}, card, {_id: savedCards._id}) : card; // Добавляет к элементу с данными фильма поле _id если id фильма и id сохраненного фильма совпадают
+            });
+            setCardsToShow(mergedArrayCards.slice(0, 7));
+            setCards(mergedArrayCards);
+          })
+          .catch(() => {
+            // Если сохраненных фильмов нет, то просто возвращает массив с фильмами
+            setCardsToShow(resCards.slice(0, 7));
+            setCards(resCards);
+          })
       })
       .catch((err) => {
         console.log(err);
@@ -39,14 +54,14 @@ function Movies() {
 
   return (
     isLoading ? <Loading /> :
-    <>
-      <main className='movies'>
-        <SearchForm />
-        <MoviesCardList cardsToShow={cardsToShow} />
-        <Preloader preloaderHandleClick={preloaderHandleClick} />
-      </main>
-      <Footer />
-    </>
+      <>
+        <main className='movies'>
+          <SearchForm />
+          <MoviesCardList cardsToShow={cardsToShow} />
+          <Preloader preloaderHandleClick={preloaderHandleClick} />
+        </main>
+        <Footer />
+      </>
   );
 }
 

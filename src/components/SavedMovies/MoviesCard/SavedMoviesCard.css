@@ -34,6 +34,13 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 50vw;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.saved-movies-card__name:hover {
+  opacity: 0.5;
 }
 
 @media screen and (max-width: 1000px) {
@@ -67,7 +74,6 @@
   }
 }
 
-
 .saved-movies-card__del {
   border: none;
   background: none;
@@ -97,6 +103,7 @@
   margin-top: 6px;
   margin-right: 6px;
   margin-bottom: 6px;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 460px) {
