@@ -106,6 +106,15 @@ class MainApi {
       }
     })
   }
+
+  getUser(jwt) {
+    return this._request(`${this.baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${jwt}`,
+      }
+    })
+  }
 }
 
 export const mainApi = new MainApi('http://api.movie.nikita.nomoredomains.monster');

@@ -54,6 +54,10 @@
   color: #4285F4;
 }
 
+.searchForm__input_error:focus::placeholder {
+  color: #EE3465;
+}
+
 @media screen and (max-width: 768px) {
   .searchForm__input {
     margin-left: 16px;
