@@ -65,11 +65,11 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-  }, [])
+  }, [loggedIn])
 
   useEffect(() => {
     checkToken()
-  }, [checkToken])
+  }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

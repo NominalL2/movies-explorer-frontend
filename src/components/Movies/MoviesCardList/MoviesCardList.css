@@ -6,6 +6,11 @@
   row-gap: 40px;
 }
 
+.moviesCardList__error {
+  margin: 0;
+  color: gray;
+}
+
 @media screen and (max-width: 320px) {
   .moviesCardList {
     row-gap: 21px;

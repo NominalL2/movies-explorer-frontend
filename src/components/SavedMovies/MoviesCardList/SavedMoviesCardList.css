@@ -6,6 +6,11 @@
   row-gap: 40px;
 }
 
+.saved-movies-card-list__error {
+  margin: 0;
+  color: gray;
+}
+
 @media screen and (max-width: 320px) {
   .saved-movies-card-list {
     row-gap: 21px;

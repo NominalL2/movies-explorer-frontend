@@ -14,87 +14,128 @@ import { mainApi } from '../../utils/MainApi.js';
 function SavedMovies() {
   const [cards, setCards] = useState([])
   const [cardsToShow, setCardsToShow] = useState([]);
+  const [preloaderToShow, setPreloaderToShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [filterByDuration, setFilterByDuration] = useState(false);
+  const [query, setQuery] = useState('');
+  const [loadingMessage, setLoadingMessage] = useState('');
+
+  function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  function readFromLocalStorage(key) {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : '';
+  }
+
+  const handleSearch = () => {
+    setIsLoading(true);
+    const jwt = localStorage.getItem('jwt');
+    const query = readFromLocalStorage('saved-query');
+    const filterByDuration = readFromLocalStorage('saved-filterByDuration');
+    const increment = window.innerWidth < 768 ? 5 : 7;
+
+    mainApi.getSavedMovies(jwt)
+      .then((resCards) => {
+        const filteredMovies = resCards.filter((movie) =>
+          movie.nameRU.toLowerCase().includes(query.trim().toLowerCase())
+        );
+        if (filteredMovies.length === 0) {
+          setLoadingMessage('Ничего не найдено');
+          saveToLocalStorage('saved-cards', []);
+          setCardsToShow([]);
+          setCards([]);
+        } else if (filterByDuration) {
+          setLoadingMessage('');
+          saveToLocalStorage('saved-cards', filteredMovies);
+          filterCardsByDucation();
+        } else {
+          setLoadingMessage('');
+          setCardsToShow(filteredMovies.slice(0, increment));
+          setCards(filteredMovies);
+          saveToLocalStorage('saved-cards', filteredMovies);
+        }
+      })
+      .catch((err) => {
+        setLoadingMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+  };
 
   const preloaderHandleClick = () => {
+    const increment = window.innerWidth < 768 ? 5 : 7;
+
     const currentLength = cardsToShow.length;
-    const nextIndex = currentLength + 7;
+    const nextIndex = currentLength + increment;
     const nextCards = cards.slice(currentLength, nextIndex);
 
     setCardsToShow([...cardsToShow, ...nextCards]);
+
+    if (nextCards.length < increment) {
+      setPreloaderToShow(false);
+    }
   };
 
   const handleCheckboxClick = () => {
-    setFilterByDuration(!filterByDuration);
-  }
-
-
-  const handleSearch = (query) => {
-    setIsLoading(true);
-    const jwt = localStorage.getItem('jwt');
-    mainApi.getSavedMovies(jwt)
-      .then((res) => {
-        const filteredMovies = res.filter((movie) =>
-          movie.nameRU.toLowerCase().includes(query.toLowerCase())
-        );
-        setCardsToShow(filteredMovies.slice(0, 7));
-        setCards(filteredMovies)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+    const newValue = !filterByDuration;
+    setFilterByDuration(newValue);
+    saveToLocalStorage('saved-filterByDuration', newValue);
   };
 
-  const getCards = useCallback(() => {
-    const jwt = localStorage.getItem('jwt');
-    mainApi.getSavedMovies(jwt)
-      .then((res) => {
-        setCardsToShow(res.slice(0, 7));
-        setCards(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
-  }, [])
+  const handleSetQuery = (query) => {
+    setQuery(query);
+    saveToLocalStorage('saved-query', query);
+  }
 
-  const filterCardsByDucation = useCallback((cards) => {
-    const filterCards = cards.filter((movie) =>
+  const filterCardsByDucation = useCallback(() => {
+    const increment = window.innerWidth < 768 ? 5 : 7;
+    const savedCards = readFromLocalStorage('saved-cards');
+    const filterCards = savedCards.filter((movie) =>
       movie.duration <= 40
     );
-    setCardsToShow(filterCards.slice(0, 7));
-    setCards(filterCards)
+    if (filterCards.length === 0) {
+      setLoadingMessage('Ничего не найдено');
+    } else {
+      setLoadingMessage('');
+      setCardsToShow(filterCards.slice(0, increment));
+      setCards(filterCards);
+    }
   }, [])
 
   useEffect(() => {
-    getCards()
-  }, [getCards]);
+    if (localStorage.getItem('saved-filterByDuration') !== null)
+      setFilterByDuration(readFromLocalStorage('saved-filterByDuration'));
+  }, [])
 
   useEffect(() => {
-    setIsLoading(true);
-    if (filterByDuration) {
-      filterCardsByDucation(cards);
-      setIsLoading(false);
+    if (cards.length <= cardsToShow.length) {
+      setPreloaderToShow(false);
     } else {
-      getCards();
+      setPreloaderToShow(true);
     }
+  }, [cardsToShow]);
 
-  }, [filterByDuration]);
+  useEffect(() => {
+    handleSearch();
+  }, [filterByDuration, query]);
 
   return (
     <>
       <main className='saved-movies'>
-        <SearchForm handleSearch={handleSearch} handleCheckboxClick={handleCheckboxClick} />
+        <SearchForm
+          handleSetQuery={handleSetQuery}
+          defaultQueryValue={readFromLocalStorage('saved-query')}
+          handleCheckboxClick={handleCheckboxClick}
+          defaultCheckedValue={readFromLocalStorage('saved-filterByDuration')}
+        />
         {isLoading ? <Loading /> :
           <>
-            <SavedMoviesCardList cardsToShow={cardsToShow} />
-            <Preloader preloaderHandleClick={preloaderHandleClick} />
+            <SavedMoviesCardList loadingMessage={loadingMessage} cardsToShow={cardsToShow} />
+            <Preloader preloaderToShow={preloaderToShow} preloaderHandleClick={preloaderHandleClick} />
           </>
         }
       </main>

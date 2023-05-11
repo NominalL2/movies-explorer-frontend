@@ -112,7 +112,7 @@ function Register(props) {
               onChange={handleNameChange}
               className={`register__input ${errorNameMessage ? 'register__input_error' : ''}`}
             />
-            {errorNameMessage && <div className='register__error'>{errorNameMessage}</div>}
+            {errorNameMessage && <span className='register__error'>{errorNameMessage}</span>}
           </div>
           <div>
             <label className='register__label'>E-mail</label>
@@ -123,7 +123,7 @@ function Register(props) {
               onChange={handleEmailChange}
               className={`register__input ${errorEmailMessage ? 'register__input_error' : ''}`}
             />
-            {errorEmailMessage && <div className='register__error'>{errorEmailMessage}</div>}
+            {errorEmailMessage && <span className='register__error'>{errorEmailMessage}</span>}
           </div>
           <div>
             <label className='register__label'>Пароль</label>
@@ -134,7 +134,7 @@ function Register(props) {
               onChange={handlePasswordChange}
               className={`register__input ${errorPasswordMessage ? 'register__input_error' : ''}`}
             />
-            {errorPasswordMessage && <div className='register__error'>{errorPasswordMessage}</div>}
+            {errorPasswordMessage && <span className='register__error'>{errorPasswordMessage}</span>}
           </div>
           {errorFormMessage && <div className='register__error-submit'>{errorFormMessage}</div>}
           <button type="submit" disabled={!isFormValid} className={`register__submit ${!isFormValid && 'register__submit_disabled'} ${errorFormMessage && 'register__submit_error'}`}>Зарегистрироваться</button>

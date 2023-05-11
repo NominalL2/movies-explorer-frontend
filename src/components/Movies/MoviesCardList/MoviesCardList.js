@@ -15,11 +15,14 @@ function MoviesCardList(props) {
   }
 
   return (
-    <section className='moviesCardList'>
-      {props.cardsToShow.map((card) => {
-        return <MoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} card={card} time={formatTime(card.duration)} img={`https://api.nomoreparties.co/${card.image.url}`} key={card.id} />
-      })}
-    </section>
+    <>
+      <section className='moviesCardList'>
+        {props.loadingMessage ? <p className='moviesCardList__error'>{props.loadingMessage}</p>
+          : props.cardsToShow.map((card) => {
+            return <MoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} card={card} time={formatTime(card.duration)} img={`https://api.nomoreparties.co/${card.image.url}`} key={card.id} />
+          })}
+      </section>
+    </>
   );
 }
 

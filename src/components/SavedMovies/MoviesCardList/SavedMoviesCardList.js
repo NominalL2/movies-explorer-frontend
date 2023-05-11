@@ -16,11 +16,14 @@ function SavedMoviesCardList(props) {
   }
 
   return (
-    <section className='saved-movies-card-list'>
-      {props.cardsToShow.map((card) => {
-        return <SavedMoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} card={card} time={formatTime(card.duration)} key={card.movieId} />
-      })}
-    </section>
+    <>
+      <section className='saved-movies-card-list'>
+        {props.loadingMessage ? <p className='saved-movies-card-list__error'>{props.loadingMessage}</p>
+      : props.cardsToShow.map((card) => {
+          return <SavedMoviesCard handleCardClick={() => hadleCardClick(card.trailerLink)} card={card} time={formatTime(card.duration)} key={card.movieId} />
+        })}
+      </section>
+    </>
   );
 }
 

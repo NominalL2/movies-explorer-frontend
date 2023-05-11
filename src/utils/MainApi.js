@@ -66,7 +66,7 @@ class MainApi {
     movieId,
     nameRU,
     nameEN,
-    ) {
+  ) {
     return this._request(`${this.baseUrl}/movies`, {
       method: 'POST',
       headers: {
@@ -113,6 +113,20 @@ class MainApi {
       headers: {
         'Authorization': `Bearer ${jwt}`,
       }
+    })
+  }
+
+  patchUser(jwt, name, email) {
+    return this._request(`${this.baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Authorization': `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      })
     })
   }
 }

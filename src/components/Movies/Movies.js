@@ -12,24 +12,49 @@ import { movieApi } from '../../utils/MoviesApi.js';
 import { mainApi } from '../../utils/MainApi.js';
 
 function Movies() {
-  const [cards, setCards] = useState([])
+  const increment = window.innerWidth < 768 ? 5 : 7;
+  const [cards, setCards] = useState([]);
   const [cardsToShow, setCardsToShow] = useState([]);
+  const [preloaderToShow, setPreloaderToShow] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [filterByDuration, setFilterByDuration] = useState(false);
+  const [query, setQuery] = useState('');
+  const [loadingMessage, setLoadingMessage] = useState('');
+
+  function saveToLocalStorage(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  function readFromLocalStorage(key) {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : '';
+  };
 
   const preloaderHandleClick = () => {
     const currentLength = cardsToShow.length;
-    const nextIndex = currentLength + 7;
+    const nextIndex = currentLength + increment;
     const nextCards = cards.slice(currentLength, nextIndex);
 
     setCardsToShow([...cardsToShow, ...nextCards]);
+
+    if (nextCards.length <= increment) {
+      setPreloaderToShow(false);
+    }
   };
 
   const handleCheckboxClick = () => {
-    setFilterByDuration(!filterByDuration);
-  }
+    const newValue = !filterByDuration;
+    setFilterByDuration(newValue);
+    saveToLocalStorage('filterByDuration', newValue);
+  };
+
+  const handleSetQuery = (query) => {
+    setQuery(query);
+    saveToLocalStorage('query', query);
+  };
 
   function mergeMoviesCards(jwt, resCards) {
+
     return mainApi.getSavedMovies(jwt)
       .then((resSavedCards) => {
         const mergedArrayCards = resCards.map(card => {
@@ -37,62 +62,59 @@ function Movies() {
           const savedCards = resSavedCards.find(savedCard => savedCard.movieId === card.id);
           return savedCards ? Object.assign({}, card, { _id: savedCards._id }) : card; // Добавляет к элементу с данными фильма поле _id если id фильма и id сохраненного фильма совпадают
         });
-        setCardsToShow(mergedArrayCards.slice(0, 7));
-        setCards(mergedArrayCards);
         return mergedArrayCards;
-      })
-      .catch(() => {
-        // Если сохраненных фильмов нет, то просто возвращает массив с фильмами
-        setCardsToShow(resCards.slice(0, 7));
-        setCards(resCards);
-      })
-  }
-
-  const getCards = useCallback(() => {
-    const jwt = localStorage.getItem('jwt');
-    movieApi.getCards()
-      .then((resCards) => {
-        mergeMoviesCards(jwt, resCards);
       })
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-        setIsLoading(false);
-      })
-  }, []);
+  };
 
-  const filterCardsByDucation = useCallback((cards) => {
-    const filterCards = cards.filter((movie) =>
+  const filterCardsByDucation = useCallback(() => {
+    const savedCards = readFromLocalStorage('cards');
+    const filterCards = savedCards.filter((movie) =>
       movie.duration <= 40
     );
-    setCardsToShow(filterCards.slice(0, 7));
-    setCards(filterCards)
-  }, [])
+    if (filterCards.length === 0) {
+      setLoadingMessage('Ничего не найдено');
+    } else {
+      setLoadingMessage('');
+      setCardsToShow(filterCards.slice(0, increment));
+      setCards(filterCards);
+    }
+  }, []);
 
-  const handleSearch = (query) => {
+  const handleSearch = () => {
     setIsLoading(true);
     const jwt = localStorage.getItem('jwt');
+    const query = readFromLocalStorage('query');
+    const filterByDuration = readFromLocalStorage('filterByDuration');
+
     movieApi.getCards()
       .then((resCards) => {
         mergeMoviesCards(jwt, resCards)
           .then((mergedArrayCards) => {
-            if (filterByDuration) {
-              const filteredMovies = mergedArrayCards.filter((movie) =>
-                movie.nameRU.toLowerCase().includes(query.toLowerCase())
-              );
-              filterCardsByDucation(filteredMovies);
-              setIsLoading(false);
+            const filteredMovies = mergedArrayCards.filter((movie) =>
+              movie.nameRU.toLowerCase().includes(query.trim().toLowerCase())
+            );
+            if (filteredMovies.length === 0) {
+              setLoadingMessage('Ничего не найдено');
+              saveToLocalStorage('cards', []);
+              setCardsToShow([]);
+              setCards([]);
+            } else if (filterByDuration) {
+              setLoadingMessage('');
+              saveToLocalStorage('cards', filteredMovies);
+              filterCardsByDucation();
             } else {
-              const filteredMovies = mergedArrayCards.filter((movie) =>
-                movie.nameRU.toLowerCase().includes(query.toLowerCase())
-              );
-              setCardsToShow(filteredMovies.slice(0, 7));
-              setCards(filteredMovies)
+              setLoadingMessage('');
+              setCardsToShow(filteredMovies.slice(0, increment));
+              setCards(filteredMovies);
+              saveToLocalStorage('cards', filteredMovies);
             }
           })
       })
       .catch((err) => {
+        setLoadingMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
         console.log(err);
       })
       .finally(() => {
@@ -101,28 +123,36 @@ function Movies() {
   };
 
   useEffect(() => {
-    getCards()
-  }, [getCards]);
+    if (localStorage.getItem('filterByDuration') !== null) {
+      setFilterByDuration(readFromLocalStorage('filterByDuration'));
+    }
+  }, []);
 
   useEffect(() => {
-    setIsLoading(true);
-    if (filterByDuration) {
-      filterCardsByDucation(cards);
-      setIsLoading(false);
+    if (cards.length <= cardsToShow.length) {
+      setPreloaderToShow(false);
     } else {
-      getCards()
+      setPreloaderToShow(true);
     }
+  }, [cardsToShow]);
 
-  }, [filterByDuration]);
+  useEffect(() => {
+    handleSearch();
+  }, [filterByDuration, query]);
 
   return (
     <>
       <main className='movies'>
-        <SearchForm handleSearch={handleSearch} handleCheckboxClick={handleCheckboxClick} />
+        <SearchForm
+          handleSetQuery={handleSetQuery}
+          defaultQueryValue={readFromLocalStorage('query')}
+          handleCheckboxClick={handleCheckboxClick}
+          defaultCheckedValue={readFromLocalStorage('filterByDuration')}
+        />
         {isLoading ? <Loading /> :
           <>
-            <MoviesCardList cardsToShow={cardsToShow} />
-            <Preloader preloaderHandleClick={preloaderHandleClick} />
+            <MoviesCardList loadingMessage={loadingMessage} cardsToShow={cardsToShow} />
+            <Preloader preloaderToShow={preloaderToShow} preloaderHandleClick={preloaderHandleClick} />
           </>
         }
       </main>
