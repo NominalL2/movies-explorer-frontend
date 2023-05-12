@@ -35,6 +35,7 @@ class MainApi {
     return this._request(`${this.baseUrl}/signin`, {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -131,4 +132,4 @@ class MainApi {
   }
 }
 
-export const mainApi = new MainApi('http://api.movie.nikita.nomoredomains.monster');
+export const mainApi = new MainApi('https://api.movie.nikita.nomoredomains.monster');
