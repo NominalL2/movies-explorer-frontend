@@ -2,6 +2,7 @@ import './SavedMovies.css';
 
 import { useState, useEffect, useCallback } from 'react';
 
+import Header from '../Header/Header.js';
 import SearchForm from '../Movies/SearchForm/SearchForm.js';
 import SavedMoviesCardList from './MoviesCardList/SavedMoviesCardList.js';
 import Preloader from '../Movies/Preloader/Preloader.js';
@@ -11,7 +12,7 @@ import Loading from '../Loading/Loading.js';
 import { mainApi } from '../../utils/MainApi.js';
 
 
-function SavedMovies() {
+function SavedMovies(props) {
   const [cards, setCards] = useState([])
   const [cardsToShow, setCardsToShow] = useState([]);
   const [preloaderToShow, setPreloaderToShow] = useState(true);
@@ -20,20 +21,10 @@ function SavedMovies() {
   const [query, setQuery] = useState('');
   const [loadingMessage, setLoadingMessage] = useState('');
 
-  function saveToLocalStorage(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  function readFromLocalStorage(key) {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : '';
-  }
 
   const handleSearch = () => {
     setIsLoading(true);
     const jwt = localStorage.getItem('jwt');
-    const query = readFromLocalStorage('saved-query');
-    const filterByDuration = readFromLocalStorage('saved-filterByDuration');
     const increment = window.innerWidth < 768 ? 5 : 7;
 
     mainApi.getSavedMovies(jwt)
@@ -43,18 +34,16 @@ function SavedMovies() {
         );
         if (filteredMovies.length === 0) {
           setLoadingMessage('Ничего не найдено');
-          saveToLocalStorage('saved-cards', []);
           setCardsToShow([]);
           setCards([]);
         } else if (filterByDuration) {
           setLoadingMessage('');
-          saveToLocalStorage('saved-cards', filteredMovies);
+          setCards(filteredMovies);
           filterCardsByDucation();
         } else {
           setLoadingMessage('');
           setCardsToShow(filteredMovies.slice(0, increment));
           setCards(filteredMovies);
-          saveToLocalStorage('saved-cards', filteredMovies);
         }
       })
       .catch((err) => {
@@ -83,18 +72,15 @@ function SavedMovies() {
   const handleCheckboxClick = () => {
     const newValue = !filterByDuration;
     setFilterByDuration(newValue);
-    saveToLocalStorage('saved-filterByDuration', newValue);
   };
 
   const handleSetQuery = (query) => {
     setQuery(query);
-    saveToLocalStorage('saved-query', query);
-  }
+  };
 
   const filterCardsByDucation = useCallback(() => {
     const increment = window.innerWidth < 768 ? 5 : 7;
-    const savedCards = readFromLocalStorage('saved-cards');
-    const filterCards = savedCards.filter((movie) =>
+    const filterCards = cards.filter((movie) =>
       movie.duration <= 40
     );
     if (filterCards.length === 0) {
@@ -104,12 +90,7 @@ function SavedMovies() {
       setCardsToShow(filterCards.slice(0, increment));
       setCards(filterCards);
     }
-  }, [])
-
-  useEffect(() => {
-    if (localStorage.getItem('saved-filterByDuration') !== null)
-      setFilterByDuration(readFromLocalStorage('saved-filterByDuration'));
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (cards.length <= cardsToShow.length) {
@@ -125,12 +106,13 @@ function SavedMovies() {
 
   return (
     <>
+    <Header logged={props.loggedIn} handleGoMain={props.handleGoMain} />
       <main className='saved-movies'>
         <SearchForm
           handleSetQuery={handleSetQuery}
-          defaultQueryValue={readFromLocalStorage('saved-query')}
+          defaultQueryValue=''
           handleCheckboxClick={handleCheckboxClick}
-          defaultCheckedValue={readFromLocalStorage('saved-filterByDuration')}
+          defaultCheckedValue={false}
         />
         {isLoading ? <Loading /> :
           <>

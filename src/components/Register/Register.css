@@ -35,6 +35,7 @@
   background-size: cover;
   width: 38px;
   height: 38px;
+  cursor: pointer;
 }
 
 .register__title {

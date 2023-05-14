@@ -2,6 +2,7 @@ import './Movies.css';
 
 import { useState, useEffect, useCallback } from 'react';
 
+import Header from '../Header/Header.js';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 import Preloader from './Preloader/Preloader.js';
@@ -11,7 +12,7 @@ import Loading from '../Loading/Loading.js';
 import { movieApi } from '../../utils/MoviesApi.js';
 import { mainApi } from '../../utils/MainApi.js';
 
-function Movies() {
+function Movies(props) {
   const increment = window.innerWidth < 768 ? 5 : 7;
   const [cards, setCards] = useState([]);
   const [cardsToShow, setCardsToShow] = useState([]);
@@ -142,6 +143,7 @@ function Movies() {
 
   return (
     <>
+    <Header logged={props.loggedIn} handleGoMain={props.handleGoMain} />
       <main className='movies'>
         <SearchForm
           handleSetQuery={handleSetQuery}

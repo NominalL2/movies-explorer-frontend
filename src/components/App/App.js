@@ -7,6 +7,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 import ProtectedRouteElement from '../ProtectedRoute/ProtectedRoute.js';
+import LoggedProtectedRouteElement from '../LoggedProtectedRoute/LoggedProtectedRoute.js';
 
 import { mainApi } from '../../utils/MainApi.js';
 
@@ -52,8 +53,13 @@ function App() {
   };
 
   const handleExit = () => {
-    localStorage.removeItem('jwt');
+    localStorage.clear();
+    setCurrentUser(null);
     navigate('/', setLoggedIn(false));
+  }
+
+  const handleGoMain = () => {
+    navigate('/');
   }
 
   useEffect(() => {
@@ -68,21 +74,20 @@ function App() {
   }, [loggedIn])
 
   useEffect(() => {
-    checkToken()
+    checkToken();
   }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <>
         <div className='page'>
-          <Header logged={loggedIn} />
           <Routes>
-            <Route path='/' element={<Main />} />
-            <Route path='/movies' element={<ProtectedRouteElement element={Movies} isLoading={isLoading} loggedIn={loggedIn} />} />
-            <Route path='/saved-movies' element={<ProtectedRouteElement element={SavedMovies} isLoading={isLoading} loggedIn={loggedIn} />} />
-            <Route path='/profile' element={<ProtectedRouteElement element={Profile} isLoading={isLoading} loggedIn={loggedIn} name='Виталий' email='pochta@yandex.ru' handleExit={handleExit} />} />
-            <Route path='/signup' element={<Register handleTokenChange={handleTokenChange} />} />
-            <Route path='/signin' element={<Login handleTokenChange={handleTokenChange} />} />
+            <Route path='/' element={<Main loggedIn={loggedIn} handleGoMain={handleGoMain} />} />
+            <Route path='/movies' element={<ProtectedRouteElement element={Movies} isLoading={isLoading} loggedIn={loggedIn} handleGoMain={handleGoMain} />} />
+            <Route path='/saved-movies' element={<ProtectedRouteElement element={SavedMovies} isLoading={isLoading} loggedIn={loggedIn} handleGoMain={handleGoMain} />} />
+            <Route path='/profile' element={<ProtectedRouteElement element={Profile} isLoading={isLoading} loggedIn={loggedIn} handleGoMain={handleGoMain} handleExit={handleExit} />} />
+            <Route path='/signup' element={<LoggedProtectedRouteElement element={Register} handleTokenChange={handleTokenChange} handleGoMain={handleGoMain} isLoading={isLoading} loggedIn={loggedIn} />} />
+            <Route path='/signin' element={<LoggedProtectedRouteElement element={Login} handleTokenChange={handleTokenChange} handleGoMain={handleGoMain} isLoading={isLoading} loggedIn={loggedIn} />} />
             <Route path='*' element={<NotFoundError handleGoBack={handleGoBack} />} />
           </Routes>
         </div>

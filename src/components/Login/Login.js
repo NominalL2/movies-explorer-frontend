@@ -76,7 +76,7 @@ function Login(props) {
   return (
     <>
       <main className='login'>
-        <div className='login__logo' />
+        <div className='login__logo' onClick={props.handleGoMain} />
         <h2 className='login__title'>Рады видеть!</h2>
         <form onSubmit={handleSubmit} className='login__form'>
           <div>

@@ -5,6 +5,8 @@ import { CurrentUserContext } from '../context/CurrentUserContext.js';
 
 import { mainApi } from '../../utils/MainApi.js';
 
+import Header from '../Header/Header.js';
+
 function Profile(props) {
   const profileInfo = useContext(CurrentUserContext);
 
@@ -93,6 +95,7 @@ function Profile(props) {
 
   return (
     <>
+    <Header logged={props.loggedIn} handleGoMain={props.handleGoMain} />
       <main className='profile'>
         <h2 className='profile__title'>{`Привет, ${titleGreetingName}!`}</h2>
         <div className='profile__container'>

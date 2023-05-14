@@ -8,10 +8,6 @@ function Header(props) {
 
   const navigate = useNavigate();
 
-  const handleGoMain = () => {
-    navigate('/');
-  }
-
   const handleGoRegister = () => {
     navigate('/signup');
   }
@@ -23,7 +19,7 @@ function Header(props) {
   if (!props.logged) {
     return (
       <header className='header'>
-        <div onClick={handleGoMain} className='header__logo' />
+        <div onClick={props.handleGoMain} className='header__logo' />
         <div className='header__sign'>
           <button onClick={handleGoRegister} className='header__signup'>Регистрация</button>
           <button onClick={handleGoLogin} className='header__signin'>Войти</button>
@@ -33,8 +29,8 @@ function Header(props) {
   } else {
     return (
       <header className='header'>
-        <div onClick={handleGoMain} className='header__logo' />
-        <Navigation handleGoMain={handleGoMain} />
+        <div onClick={props.handleGoMain} className='header__logo' />
+        <Navigation handleGoMain={props.handleGoMain} />
       </header>
     )
   }

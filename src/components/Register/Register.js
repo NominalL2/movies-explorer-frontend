@@ -100,7 +100,7 @@ function Register(props) {
   return (
     <>
       <main className='register'>
-        <div className='register__logo' />
+        <div className='register__logo' onClick={props.handleGoMain} />
         <h2 className='register__title'>Добро пожаловать!</h2>
         <form onSubmit={handleSubmit} className='register__form'>
           <div>
