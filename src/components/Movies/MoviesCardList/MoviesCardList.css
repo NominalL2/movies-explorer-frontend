@@ -1,0 +1,18 @@
+.moviesCardList {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-auto-flow: row;
+  row-gap: 40px;
+}
+
+.moviesCardList__error {
+  margin: 0;
+  color: gray;
+}
+
+@media screen and (max-width: 320px) {
+  .moviesCardList {
+    row-gap: 21px;
+  }
+}

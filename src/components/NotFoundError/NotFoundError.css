@@ -1,0 +1,75 @@
+.notFoundError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .notFoundError {
+    padding-bottom: 222px;
+  }
+}
+
+.notFoundError__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  text-align: center;
+  margin: 0;
+  margin-top: 245px;
+}
+
+@media screen and (max-width: 768px) {
+  .notFoundError__title {
+    margin-top: 407px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .notFoundError__title {
+    font-size: 80px;
+    line-height: 97px;
+    margin-top: 330px;
+  }
+}
+
+.notFoundError__text {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  margin: 0;
+  margin-top: 7px;
+}
+
+@media screen and (max-width: 320px) {
+  .notFoundError__text {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 10px;
+  }
+}
+
+.notFoundError__exit {
+  border: none;
+  background: none;
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #4285F4;
+  margin-top: 183px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 320px) {
+  .notFoundError__exit {
+    margin-top: 284px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

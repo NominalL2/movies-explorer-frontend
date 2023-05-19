@@ -1,0 +1,126 @@
+.navTab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  height: 493px;
+  background-color: #272727;
+  border-radius: 10px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .navTab {
+    max-width: 728px;
+    height: 834px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navTab {
+    height: 900px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navTab {
+    max-width: 292px;
+    height: 586px;
+    margin-top: 14px;
+    justify-content: normal;
+  }
+}
+
+@media screen and (max-width: 294px) {
+  .navTab {
+    height: 620px;
+  }
+}
+
+
+.navTab__title {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  text-align: center;
+  margin: 0;
+  max-width: 702px;
+  margin-top: 160px;
+  margin-bottom: 150px;
+}
+
+@media screen and (max-width: 768px) {
+  .navTab__title {
+    font-size: 40px;
+    line-height: 52px;
+    max-width: 682px;
+    margin-top: 351px;
+    margin-bottom: 314px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .navTab__title {
+    font-size: 29px;
+    line-height: 37px;
+    margin-top: 220px;
+    margin-bottom: 211px;
+  }
+}
+
+.navTab__navBar {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 29px;
+  gap: 10px;
+}
+
+@media screen and (max-width: 320px) {
+  .navTab__navBar {
+    gap: 6px;
+  }
+}
+
+.navTab__navButton {
+  background: #303030;
+  border-radius: 10px;
+  width: 96px;
+  height: 24px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 10px;
+  text-decoration: none;
+}
+
+.navTab__navButton:hover {
+  transition:  0.3s ease;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 768px) {
+  .navTab__navButton {
+    height: 26px;
+    padding-top: 8px;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .navTab__navButton {
+    width: 82px;
+    height: 20px;
+    font-size: 10px;
+    line-height: 16px;
+    border-radius: 6px;
+    padding-top: 7px;
+  }
+}
