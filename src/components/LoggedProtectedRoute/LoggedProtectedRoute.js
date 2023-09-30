@@ -8,7 +8,7 @@ import Loading from '../Loading/Loading.js';
 const LoggedProtectedRouteElement = ({ element: Component, ...props }) => {
 
   return (
-    props.isLoading ? <Loading /> : props.loggedIn ? <Navigate to='/' replace /> : <Component {...props} />
+    props.isLoading ? <Loading /> : <Component {...props} />
   )
 }
 

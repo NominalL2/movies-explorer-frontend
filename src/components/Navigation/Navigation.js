@@ -35,11 +35,6 @@ function Navigation(props) {
       <nav className='navigation'>
         <div className='navigation__movies'>
           <button onClick={handleGoMovies} className='navigation__button'>Фильмы</button>
-          <button onClick={handleGoSavedMovies} className='navigation__button'>Сохранённые фильмы</button>
-        </div>
-        <div className='navigation__account'>
-          <button onClick={handleGoProfile} className='navigation__button'>Аккаунт</button>
-          <span onClick={handleGoProfile} className='navigation__profile-icon' />
         </div>
         <div onClick={handleOpenPopup} className='navigation__nav-icon' />
       </nav>

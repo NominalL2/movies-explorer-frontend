@@ -10,7 +10,6 @@ import Footer from '../Footer/Footer.js';
 import Loading from '../Loading/Loading.js';
 
 import { movieApi } from '../../utils/MoviesApi.js';
-import { mainApi } from '../../utils/MainApi.js';
 
 function Movies(props) {
   const increment = window.innerWidth < 768 ? 5 : 7;
@@ -54,22 +53,6 @@ function Movies(props) {
     saveToLocalStorage('query', query);
   };
 
-  function mergeMoviesCards(jwt, resCards) {
-
-    return mainApi.getSavedMovies(jwt)
-      .then((resSavedCards) => {
-        const mergedArrayCards = resCards.map(card => {
-          // Объеденяет массив картачек фильмов с массивом сохраненных карточек для того что бы потом определять лайкнута карточка или нет
-          const savedCards = resSavedCards.find(savedCard => savedCard.movieId === card.id);
-          return savedCards ? Object.assign({}, card, { _id: savedCards._id }) : card; // Добавляет к элементу с данными фильма поле _id если id фильма и id сохраненного фильма совпадают
-        });
-        return mergedArrayCards;
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  };
-
   const filterCardsByDucation = useCallback(() => {
     const savedCards = readFromLocalStorage('cards');
     const filterCards = savedCards.filter((movie) =>
@@ -86,15 +69,12 @@ function Movies(props) {
 
   const handleSearch = () => {
     setIsLoading(true);
-    const jwt = localStorage.getItem('jwt');
     const query = readFromLocalStorage('query');
     const filterByDuration = readFromLocalStorage('filterByDuration');
 
     movieApi.getCards()
       .then((resCards) => {
-        mergeMoviesCards(jwt, resCards)
-          .then((mergedArrayCards) => {
-            const filteredMovies = mergedArrayCards.filter((movie) =>
+            const filteredMovies = resCards.filter((movie) =>
               movie.nameRU.toLowerCase().includes(query.trim().toLowerCase())
             );
             if (filteredMovies.length === 0) {
@@ -112,7 +92,6 @@ function Movies(props) {
               setCards(filteredMovies);
               saveToLocalStorage('cards', filteredMovies);
             }
-          })
       })
       .catch((err) => {
         setLoadingMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
